@@ -3,6 +3,9 @@ import asyncio
 import json
 
 async def listen():
+    '''
+    Function to listen and receive message from a websocket URL
+    '''
     url = "wss://eu4pro.loriot.io/app?token=vgEGwgAAABBldTRwcm8ubG9yaW90Lmlv_CRMgdeGghpfxY0ZXJWq9Q=="
 
     async with websockets.connect(url) as uplink:
@@ -20,5 +23,6 @@ async def listen():
                 print('Sensor ID: ' + sensor_eui)
                 print('Uplink Count: ' + str(count))
                 print('Data: ' + sensor_data)
+
 
 asyncio.get_event_loop().run_until_complete(listen())
