@@ -1,6 +1,8 @@
 import websockets
 import asyncio
 import json
+from modules.hex_to_bytes import decoder
+
 
 async def listen():
     '''
@@ -23,6 +25,8 @@ async def listen():
                 print('Sensor ID: ' + sensor_eui)
                 print('Uplink Count: ' + str(count))
                 print('Data: ' + sensor_data)
+                environmental_data = decoder(sensor_data)
+                print('Environmental Data: ', environmental_data)
 
 
 asyncio.get_event_loop().run_until_complete(listen())
