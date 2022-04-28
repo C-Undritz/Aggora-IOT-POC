@@ -60,7 +60,7 @@ Once logged into the LORIOT console (from here https://loriot.io/login.html), na
 
 The target URL Template needs to added as the url variable value with the websocket.py file
 
-The string object received by the websocket is converted to JSON to be read by the app in a dictionary format where it could be queried to provide the value of the required variables.
+The string object received by the websocket is converted to JSON to be read by the app in a dictionary format where it could be queried to provide the value of the required variables.  The hexidecimal encoded environment data is then passed to the decoder function to produce a python dictionary containing the temperature and humidity in a readable format.
 
 ## Run the application
 - type into the the console: 
@@ -79,4 +79,8 @@ python3 websocket.py
 - https://www.youtube.com/watch?v=tgtb9iucOts
 - https://websockets.readthedocs.io/en/stable/index.html
 - The data recieved from the uplink is a string.  To convert it to JSON the json.loads function was used as per the instructions here: https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
+### For the decoder:
+The decoder code was coverted from the JavaScript found in the below github repo directed from the Milesight support pages:
+https://github.com/Milesight-IoT/SensorDecoders/tree/master/EM300_Series/EM300-TH
+
 
