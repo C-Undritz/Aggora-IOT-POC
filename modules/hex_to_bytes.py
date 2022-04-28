@@ -1,8 +1,15 @@
-def decoder(data):
+"""
+functions responsible for decoding the hexidecimal data into a python
+dictionary that contains the meaning environment data.
+"""
+
+
+def decoder(hexdata):
     '''
     Decodes the data array into dictionary containing the temperature and
     humidity data.
     '''
+    data = hex_to_decimal_array(hexdata)
     decoded = {}
     j = 0
     while j < len(data):
@@ -16,9 +23,7 @@ def decoder(data):
         # Temperature
         elif (int(channel_id) == 0x03 and int(channel_type) == 0x67):
             required_slice = slice(j, j+2)
-            # required_data = data[required_slice]
-            # test_var = readInt16LE(data[required_slice]) / 10
-            decoded["temperature"] = readInt16LE(data[required_slice]) / 10
+            decoded["temperature"] = read_int_16le(data[required_slice]) / 10
             j += 2
         # Humidity
         elif (int(channel_id) == 0x04 and int(channel_type) == 0x68):
@@ -30,37 +35,36 @@ def decoder(data):
     return decoded
 
 
-def readUInt16LE(gerbil):
-    value = (gerbil[1] << 8) + gerbil[0]
-    return value & 0xffff
-
-
-def readInt16LE(hamster):
-    ref = readUInt16LE(hamster)
-    return ref - 0x10000 if ref > 0x7fff else ref
-
-
-def hex_to_byte_array(hexdata):
+def read_uint_16le(value):
     '''
-    Converts hex data to byte array for the decode function. 
+    Required function when determining the temperature value
+    '''
+    uint_value = (value[1] << 8) + value[0]
+    return uint_value & 0xffff
+
+
+def read_int_16le(value):
+    '''
+    Required function when determining the temperature value
+    '''
+    int_value = read_uint_16le(value)
+    return int_value - 0x10000 if int_value > 0x7fff else int_value
+
+
+def hex_to_decimal_array(hexdata):
+    '''
+    Converts hex data to decimal array for the decode function.
     '''
     if len(hexdata) % 2 != 0:
-        print("Error: There must be an even number of hex digits to convert to bytes")
+        print("Error: There must be an even number of hex digits to convert to decimals")
     else:
         num_bytes = len(hexdata) / 2
-        byte_array = []
+        decimal_array = []
         i = 0
         while i < num_bytes:
             hex_value = hexdata[i*2:i*2+2]
             byte = bytes.fromhex(hex_value)
-            byte_array.append(byte[0])
+            decimal_array.append(byte[0])
             i += 1
-        return byte_array
 
-
-original_data = "0367e00004684b"
-final_data = decoder(hex_to_byte_array(original_data))
-
-print(final_data)
-print(final_data["temperature"])
-print(final_data["humidity"])
+        return decimal_array
