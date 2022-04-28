@@ -6,8 +6,10 @@ dictionary that contains the meaning environment data.
 
 def decoder(hexdata):
     '''
-    Decodes the data array into dictionary containing the temperature and
-    humidity data.
+    Decodes the encoded uplink data into a dictionary containing the
+    temperature and humidity data.  This is the decode functions for the
+    Milesight EM300-TH-868M temperature and humidity sensor.  It is likely
+    that this will need updating for a different sensor.
     '''
     data = hex_to_decimal_array(hexdata)
     decoded = {}

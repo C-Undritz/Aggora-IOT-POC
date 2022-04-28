@@ -4,6 +4,8 @@
 ### 1) Use of webhook with The Things Network (TTN)
 ### 2) Use of websockets with the LORIOT network
 
+## Sensor Hardware
+The sensors used to test this code is the [Milesight EM300-TH-868M temperature and humidity sensor](https://www.milesight-iot.com/lorawan/sensor/em300-th/)
 <br>
 
 >## TTN webhook
