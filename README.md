@@ -80,7 +80,8 @@ python3 websocket.py
 - https://websockets.readthedocs.io/en/stable/index.html
 - The data recieved from the uplink is a string.  To convert it to JSON the json.loads function was used as per the instructions here: https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
 ### For the decoder:
-The decoder code was coverted from the JavaScript found in the below github repo directed from the Milesight support pages:
-https://github.com/Milesight-IoT/SensorDecoders/tree/master/EM300_Series/EM300-TH
+- The decoder code was coverted from the JavaScript found in the below github repo directed from the Milesight support pages: https://github.com/Milesight-IoT/SensorDecoders/tree/master/EM300_Series/EM300-TH
+- The hex_to_decimal_array function was converted from the Javascript found on the following link: http://www.java2s.com/example/nodejs/string/convert-hex-string-to-byte-array.html
+
 
 
