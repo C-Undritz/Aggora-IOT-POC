@@ -60,13 +60,11 @@ def hex_to_decimal_array(hexdata):
     if len(hexdata) % 2 != 0:
         print("Error: There must be an even number of hex digits to convert to decimals")
     else:
-        num_bytes = len(hexdata) / 2
         decimal_array = []
         i = 0
-        while i < num_bytes:
-            hex_value = hexdata[i*2:i*2+2]
-            byte = bytes.fromhex(hex_value)
-            decimal_array.append(byte[0])
-            i += 1
+        while i < len(hexdata):
+            hex_value = hexdata[i:i+2]
+            decimal_array.append(int(hex_value, 16))
+            i += 2
 
         return decimal_array
