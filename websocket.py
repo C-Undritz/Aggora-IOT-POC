@@ -14,19 +14,24 @@ async def listen():
         while True:
             data = await uplink.recv()
             json_data = json.loads(data)
-
+            print(json_data)
             cmd = json_data['cmd']
 
-            if (cmd == 'rx'):
+            if (cmd == 'gw'):
                 sensor_eui = json_data['EUI']
                 count = json_data['fcnt']
                 sensor_data = json_data['data']
+                uplink_time = json_data['gws'][0]['time']
+                gateway = json_data['gws'][0]['gweui']
 
                 print('Sensor ID: ' + sensor_eui)
                 print('Uplink Count: ' + str(count))
                 print('Data: ' + sensor_data)
                 environmental_data = decoder(sensor_data)
-                print('Environmental Data: ', environmental_data)
+                print('temperature: ' + str(environmental_data["temperature"]))
+                print('humidity: ' + str(environmental_data["humidity"]))
+                print('uplink time: ' + str(uplink_time))
+                print('Gateway ID: ' + gateway)
 
 
 asyncio.get_event_loop().run_until_complete(listen())
